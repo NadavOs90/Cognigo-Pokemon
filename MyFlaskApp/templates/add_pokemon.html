@@ -1,0 +1,16 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+    <div class="jumbotron text-center">
+        <h1>Add Pokemon</h1>
+        {% from "includes/_formhelpers.html" import render_field %}
+        <form method="POST" action="">
+            <div class="form-group">
+                {{render_field(form.pokemon_json_string, class_="form-control", cols="25", rows="20")}}
+            </div>
+            <p>
+                <input type="submit" class="btn btn-primary" value="Add Pokemon">
+            </p>
+        </form>
+    </div>
+{% endblock %}

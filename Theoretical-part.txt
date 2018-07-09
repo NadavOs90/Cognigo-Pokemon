@@ -1,0 +1,9 @@
+1) for the logging part i would create a logger and pass it to elasticsearch and set it to receive logs from info,
+warning and error that way we will log all requests in addition we will add to each log the current user and a timestamp.
+We can create another elasticsearch db for the logs and when we search it for a user we could see all his actions
+and order it by the timestamp to see the order of his actions (api requests).
+With a log elasticsearch db we can run queries for analytics with simple access, this db could be shared between the multiple instances of the server.
+
+2)in a larger scale i would create a queue for requests and worker nodes who take each request run them and return the response.
+I would also create a caching mechanism for each user based on his searches to improve response time and lower the amount of requests in the queue.
+And finally I would turn my single node elasticsearch to a cluster and balance the workers and the nodes in the cluster to optimize the response time.
