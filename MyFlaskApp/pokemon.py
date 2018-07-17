@@ -5,26 +5,11 @@ import sys
 import requests
 
 
-def create_es():
-    # es_bat_path = "C:\\Users\\nadav.ostrowsky\\Downloads\\elasticsearch-6.3.1\\bin\\elasticsearch"
-    es_bat_path = raw_input('Enter Elasticsearch batch file path: ')
-    p = subprocess.Popen(["powershell.exe", es_bat_path], stdout=sys.stdout)
-    p.communicate()
-
-
-try:
-    res = requests.get('http://localhost:9200')
-    if res.status_code != 200 and json.loads(res.content)['cluster_name'] != 'elasticsearch':
-        create_es()
-except:
-    create_es()
-
-
 es = Elasticsearch([{'host': 'localhost', 'port': 9200}])
 
 
 def validate_pokemon_json(json_string):
-    types = ["ELECTRIC", "GROUND", "FIRE", "WATER", "WIND", "PSYCHIC", "GRASS"]
+    types = ["ELECTRIC", "GROUND", "FIRE", "WATER", "WIND", "PSYCHIC", "GRASS", 'NORMAL', 'ROCK', 'POISON', 'BUG', 'ICE', 'GHOST', 'DRAGON']
     try:
         json_obj = json.loads(json_string)
     except ValueError as e:
@@ -60,6 +45,16 @@ def search(string):
                 "query": string,
                 "type": "phrase_prefix",
                 "fields": []
+            }
+        }
+    }
+    query2 = {
+        "query": {
+            "match" : {
+                "message" : {
+                    "query" : string,
+                    "operator" : "and"
+                }
             }
         }
     }
