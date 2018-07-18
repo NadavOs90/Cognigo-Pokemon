@@ -18,17 +18,7 @@ def search(string):
             "multi_match": {
                 "query": string,
                 "type": "phrase_prefix",
-                "fields": []
-            }
-        }
-    }
-    query2 = {
-        "query": {
-            "match" : {
-                "message" : {
-                    "query" : string,
-                    "operator" : "and"
-                }
+                "fields": [],
             }
         }
     }
